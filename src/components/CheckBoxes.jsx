@@ -1,5 +1,4 @@
 export default function CheckBoxes({handleChange, formData}) {
-    
     /*
         Leveraging an alternative approach for learning purposes.
         Declaring the various ducky activities in an array makes 

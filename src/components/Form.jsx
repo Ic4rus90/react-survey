@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import CheckBoxes from "./CheckBoxes";
 import RadioButtons from "./RadioButtons";
 
-export default function Form({ addAnswer }) {
+export default function Form({ addAnswer, editForm }) {
     const initialState = {
         color: 0,
         spendTime: [],
@@ -10,6 +10,21 @@ export default function Form({ addAnswer }) {
         username: '',
         email: ''
     };
+
+    /*
+
+    */
+
+    useEffect(() => {
+        if (editForm) {
+            // If editform is not null, then set the form data to the form in editform
+            setFormData(editForm);
+        } else {
+            // If editForm is not null, initialize as usual
+            setFormData(initialState);
+        }
+        // Dependency array. When changes happen to the dependency array, the effect executes
+    }, [editForm])
     
     const [formData, setFormData] = useState(initialState);
 
@@ -55,9 +70,8 @@ export default function Form({ addAnswer }) {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-
-        addAnswer(formData);
-        
+        // If editForm is not null, include the index.
+        addAnswer(formData, editForm ? editForm.index : null);
         setFormData(initialState);
     }
 
@@ -101,9 +115,12 @@ export default function Form({ addAnswer }) {
             />
         </label>
         <input 
-        className="form__submit" 
-        type="submit" 
-        value="Submit Survey!" 
+            className="form__submit" 
+            type="submit" 
+            /* 
+                If the user is updating an answer, the the button says "Update     Answer". If not the button says "Submit Survey". 
+            */
+            value={editForm ? "Update Answer" : "Submit Survey"} 
         />
       </form>
       );

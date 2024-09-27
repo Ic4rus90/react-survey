@@ -16,13 +16,10 @@ function ItemsList({ list }) {
 }
 
 // This is the main component being exported from this file
-export default function AnswersItem({ 
-  answerItem: { 
-    username, 
-    color, 
-    spendTime, 
-    review 
-  }}) {
+export default function AnswersItem({ answerItem, editAnswer, index }){
+  const {username, color, spendTime, review} = answerItem;
+  
+  if (!answerItem) return null;
   return (
     <li>
       <article className="answer">
@@ -39,6 +36,7 @@ export default function AnswersItem({
           <em>What else have you got to say about your rubber duck?</em>
           <span className="answer__line">{review}</span>
         </p>
+        <button onClick={() => editAnswer(index)}> Edit </button>
       </article>
     </li>
   );

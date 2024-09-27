@@ -8,7 +8,7 @@ export default function RadioButtons({ handleChange, formData }) {
                 name="color" 
                 value="1" 
                 onChange={handleChange}
-                checked={formData.colour === "1"}
+                checked={formData.color === "1"}
                 />
                 <label htmlFor="color-one"> 1 </label>
             </li>
